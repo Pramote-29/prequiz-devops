@@ -13,12 +13,12 @@ terraform {
 } 
 
 provider "docker" { 
-  host = "npipe:////./pipe/docker_engine" 
-} 
+  host = "unix:///var/run/docker.sock"
+}
 
 resource "null_resource" "execute_script" {
   provisioner "local-exec" {
-    command = "powershell.exe ./buildImg.ps1"
+    command = "pwsh ./buildImg.ps1"
     working_dir = "${path.module}"
   }
 }
